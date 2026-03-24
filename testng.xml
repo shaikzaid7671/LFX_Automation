@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="LFX Mobile App Test Suite" verbose="10" parallel="false">
+
+    <!-- Test Listeners -->
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter"/>
+        <listener class-name="org.testng.reporters.XMLReporter"/>
+    </listeners>
+
+    <!-- Login Tests -->
+    <test name="LFX Login Tests">
+        <classes>
+            <class name="com.snasquare.appium.tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>
+
+    <!--
+    Add more test classes here as you create them:
+
+    <test name="LFX Homepage Tests">
+        <classes>
+            <class name="com.snasquare.appium.tests.HomePageTest"/>
+        </classes>
+    </test>
+
+    <test name="LFX Registration Tests">
+        <classes>
+            <class name="com.snasquare.appium.tests.RegistrationTest"/>
+        </classes>
+    </test>
+    -->
