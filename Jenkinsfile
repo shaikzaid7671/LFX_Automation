@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DEVICE_ID = "10BE571EH40009D" // get from 'adb devices'
+        DEVICE_ID = "10BE571EH40009D"
     }
 
     stages {
+
         stage('Build Project') {
             steps {
                 bat 'mvn clean install -DskipTests'
@@ -14,8 +15,8 @@ pipeline {
 
         stage('Start Appium') {
             steps {
-                // Run Appium server on host machine
-                bat 'start /B appium'
+                bat 'start cmd /c appium'
+                bat 'timeout /t 15'
             }
         }
 
