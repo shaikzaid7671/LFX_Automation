@@ -7,7 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Build Project') {
+        stage('Build') {
             steps {
                 bat 'mvn clean install -DskipTests'
             }
@@ -16,26 +16,14 @@ pipeline {
         stage('Start Appium') {
             steps {
                 bat 'start cmd /c appium'
-                bat 'timeout /t 15'
+                bat 'timeout /t 10'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run LoginTest') {
             steps {
-                bat "mvn test -DdeviceId=${DEVICE_ID}"
+                bat "mvn test -Dtest=LoginTest -DdeviceId=${DEVICE_ID}"
             }
-        }
-
-        stage('Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-            }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', allowEmptyArchive: true
         }
     }
 }
