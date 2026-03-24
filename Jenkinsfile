@@ -6,13 +6,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/shaikzaid7671/LFX_Automation.git'
-            }
-        }
-
         stage('Build Project') {
             steps {
                 bat 'mvn clean install -DskipTests'
