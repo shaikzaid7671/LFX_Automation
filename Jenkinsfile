@@ -28,7 +28,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat "mvn test -DdeviceId=${10BE571EH40009D}"
+                bat "mvn test -DdeviceId=${DEVICE_ID}"
             }
         }
 
