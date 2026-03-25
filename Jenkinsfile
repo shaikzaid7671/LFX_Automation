@@ -7,15 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("lfx-automation")
-                }
-            }
-        }
-
-        stage('Build Project') {
+        stage('Build') {
             steps {
                 bat 'mvn clean install -DskipTests'
             }
@@ -23,12 +15,12 @@ pipeline {
 
         stage('Start Appium') {
             steps {
-                bat 'start /B appium'
+                bat 'start cmd /c appium'
                 bat 'ping 127.0.0.1 -n 10 > nul'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run LoginTest') {
             steps {
                 bat "mvn test -Dtest=LoginTest -DdeviceId=%DEVICE_ID%"
             }
