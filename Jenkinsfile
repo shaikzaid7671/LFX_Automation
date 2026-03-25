@@ -1,29 +1,24 @@
 pipeline {
     agent any
 
-    environment {
-        DEVICE_ID = "10BE571EH40009D"
-    }
-
     stages {
-
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                bat 'mvn clean install -DskipTests'
+                script {
+                    docker.build("lfx-automation")
+                }
             }
         }
 
-        stage('Start Appium') {
+        stage('Run Tests in Container') {
             steps {
-                bat 'start cmd /c appium'
-                bat 'ping 127.0.0.1 -n 10 > nul'
+                script {
+                    docker.image("lfx-automation").inside {
+                        sh 'mvn test'
+                    }
+                }
             }
         }
 
-        stage('Run LoginTest') {
-            steps {
-                bat "mvn test -Dtest=LoginTest -DdeviceId=%DEVICE_ID%"
-            }
-        }
     }
 }
