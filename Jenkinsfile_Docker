@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("lfx-automation")
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d --name lfx-container lfx-automation'
+            }
+        }
+
+        stage('Check Running Container') {
+            steps {
+                bat 'docker ps'
+            }
+        }
+
+    }
+}
