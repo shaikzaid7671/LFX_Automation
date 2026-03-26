@@ -1,27 +1,48 @@
 pipeline {
     agent any
 
-    stages {
+    environment {
+        DEVICE_IP = "192.168.1.17:5555"
+    }
 
+    stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("lfx-automation")
+                    docker.build("appium-login-test")
                 }
             }
         }
 
-        stage('Run Container') {
+        stage('Run Login Test in Container') {
             steps {
-                bat 'docker run -d --name lfx-container lfx-automation'
+                script {
+                    docker.image("appium-login-test").inside('--network=host') {
+
+                        sh '''
+                        echo "Connecting to real device..."
+                        adb connect ''' + DEVICE_IP + '''
+
+                        echo "Checking devices..."
+                        adb devices
+
+                        echo "Starting Appium server..."
+                        appium --log-level error &
+                        sleep 15
+
+                        echo "Running Login Test..."
+                        mvn clean test
+                        '''
+                    }
+                }
             }
         }
+    }
 
-        stage('Check Running Container') {
-            steps {
-                bat 'docker ps'
-            }
+    post {
+        always {
+            echo "Publishing Test Results..."
+            junit '**/target/surefire-reports/*.xml'
         }
-
     }
 }
