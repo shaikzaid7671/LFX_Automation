@@ -17,18 +17,9 @@ pipeline {
 stage('Run Login Test in Container') {
     steps {
         script {
-            bat """
-            docker run --rm ^
-            --network=host ^
-            appium-login-test ^
-            bash -c "
-            adb connect 192.168.1.17:5555 &&
-            adb devices &&
-            appium --port 4723 & 
-            sleep 10 &&
-            mvn test
-            "
-            """
+            bat '''
+            docker run --rm --network=host appium-login-test bash -c "adb connect 192.168.1.17:5555 && adb devices && appium --port 4723 & sleep 10 && mvn test"
+            '''
         }
     }
 }
