@@ -23,8 +23,8 @@ RUN node -v && npm -v
 # Install Appium
 RUN npm install -g appium
 
-# Install Appium driver (VERY IMPORTANT)
-RUN appium driver install uiautomator2
+# Install compatible driver
+RUN appium driver install uiautomator2@2.29.2
 
 # Set JAVA_HOME
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
