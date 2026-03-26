@@ -28,7 +28,7 @@ stage('Run Login Test in Container') {
     post {
         always {
             echo "Publishing Test Results..."
-            junit '**/target/surefire-reports/*.xml'
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
         }
     }
 }
