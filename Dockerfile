@@ -13,7 +13,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 RUN npm install -g appium
 
 # Install Appium driver
-RUN appium driver install uiautomator2
+RUN appium driver install uiautomator2@2.29.2
 
 # -------------------------
 # 🔥 ANDROID SDK INSTALL
