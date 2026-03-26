@@ -17,23 +17,18 @@ pipeline {
         stage('Run Login Test in Container') {
             steps {
                 script {
-                    docker.image("appium-login-test").inside('--network=host') {
-
-                        sh '''
-                        echo "Connecting to real device..."
-                        adb connect ''' + DEVICE_IP + '''
-
-                        echo "Checking devices..."
-                        adb devices
-
-                        echo "Starting Appium server..."
-                        appium --log-level error &
-                        sleep 15
-
-                        echo "Running Login Test..."
-                        mvn clean test
-                        '''
-                    }
+                    bat """
+                        docker run --rm ^
+                        --network=host ^
+                        appium-login-test ^
+                        cmd /c "
+            adb connect 192.168.1.17:5555 &&
+            adb devices &&
+            appium --port 4723 & 
+            timeout /t 10 &&
+            mvn test
+            "
+            """
                 }
             }
         }
