@@ -28,7 +28,7 @@ public class LoginTest {
 
         cap.setCapability("platformName", "Android");
         cap.setCapability("deviceName", "Android Device");
-        cap.setCapability("udid", "192.168.1.17:5555");
+        cap.setCapability("udid", "192.168.29.113:5555");
         cap.setCapability("automationName", "UiAutomator2");
 
         cap.setCapability("appPackage", "com.android.settings");
