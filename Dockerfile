@@ -2,24 +2,29 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
+# Install basic tools
 RUN apt-get update && apt-get install -y \
-    openjdk-17-jdk \
-    maven \
-    nodejs \
-    npm \
-    adb \
     curl \
     wget \
     unzip \
     git \
+    openjdk-17-jdk \
+    maven \
+    adb \
     && rm -rf /var/lib/apt/lists/*
+
+# 🔥 Install Node.js 18 (IMPORTANT FIX)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+# Verify node version
+RUN node -v && npm -v
 
 # Install Appium
 RUN npm install -g appium
 
-# Verify installations
-RUN java -version && mvn -version && appium -v
+# Install Appium driver (VERY IMPORTANT)
+RUN appium driver install uiautomator2
 
 # Set JAVA_HOME
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
@@ -34,5 +39,4 @@ COPY . /app
 # Expose Appium port
 EXPOSE 4723
 
-# Default command (can be overridden by Jenkins)
 CMD ["bash"]
