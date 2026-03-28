@@ -13,6 +13,13 @@ pipeline {
                 }
             }
         }
+stage('Build Docker Image') {
+    steps {
+        script {
+            docker.build("appium-epost-test")  // ✅ lowercase
+        }
+    }
+}
 stage('Run Login Test in Container') {
     steps {
         script {
