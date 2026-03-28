@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-stage('Run Emergency Test in Container') {
+stage('Run Emergency Post in Container') {
     steps {
         script {
             docker.build("appium-epost-test")  // ✅ lowercase
