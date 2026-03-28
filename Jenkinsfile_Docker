@@ -23,6 +23,15 @@ stage('Run Login Test in Container') {
         }
     }
 }
+stage('Run Emergency Test in Container') {
+    steps {
+        script {
+            bat '''
+            docker run --rm --network=host appium-login-test bash -c "adb connect 192.168.1.17:5555 && adb devices && appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 & sleep 20 && mvn test -Dtest=EPost"
+            '''
+        }
+    }
+}
     }
 
     post {
