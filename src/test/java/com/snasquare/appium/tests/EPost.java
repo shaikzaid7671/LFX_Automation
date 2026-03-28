@@ -25,7 +25,7 @@ public class EPost {
 
         caps.setCapability("platformName", "Android");
         caps.setCapability("deviceName", "Android Device");
-        caps.setCapability("udid", "192.168.1.25:5555");
+        caps.setCapability("udid", "192.168.1.17:5555");
         caps.setCapability("automationName", "UiAutomator2");
 
         caps.setCapability("appPackage", "com.android.settings");
