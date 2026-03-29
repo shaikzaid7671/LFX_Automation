@@ -19,7 +19,11 @@ pipeline {
                 script { 
                     bat '''
                     docker run --rm --network=host appium-epost-test bash -c "
-                    adb connect 192.168.1.17:5555 && adb devices && nohup appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 & ping -n 20 127.0.0.1 > nul && mvn test -Dtest=EPost"
+                    adb connect 192.168.1.17:5555 && 
+                    adb devices && 
+                    nohup appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 & 
+                    sleep 20 && 
+                    mvn test -Dtest=EPost"
                     '''
                 }
             } 
