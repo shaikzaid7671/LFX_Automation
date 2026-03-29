@@ -3,16 +3,15 @@
 
 <suite name="LFX Mobile App Test Suite" verbose="10" parallel="false">
 
-    <!-- Test Listeners -->
     <listeners>
         <listener class-name="org.testng.reporters.EmailableReporter"/>
         <listener class-name="org.testng.reporters.XMLReporter"/>
     </listeners>
 
-    <!-- Login Tests -->
-    <test name="LFX Login Tests">
+    <test name="LFX All Tests">
         <classes>
             <class name="com.snasquare.appium.tests.LoginTest"/>
+            <class name="com.snasquare.appium.tests.EPostTest"/>
         </classes>
     </test>
 
