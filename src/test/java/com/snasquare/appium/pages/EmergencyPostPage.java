@@ -15,12 +15,6 @@ public class EmergencyPostPage {
     private AppiumDriver driver;
     private WebDriverWait wait;
 
-    public EmergencyPostPage(AppiumDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
     // ---------------- LOCATORS ---------------- //
 
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc='POST EMERGENCY']")
