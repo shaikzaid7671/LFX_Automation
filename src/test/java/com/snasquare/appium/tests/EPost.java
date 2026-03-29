@@ -35,7 +35,7 @@ public class EPost {
         cap.setCapability("appActivity", ".Settings");
 
         cap.setCapability("noReset", true);
-        cap.setCapability("newCommandTimeout", 300);
+        cap.setCapability("fullReset", false);
 
          // ✅ FIXED (removed local variable)
         driver = new AndroidDriver(
