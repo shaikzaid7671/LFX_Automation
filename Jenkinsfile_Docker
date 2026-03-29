@@ -14,15 +14,15 @@ pipeline {
             } 
         } 
 
-        stage('Run Emergency Test in Container') { 
-            steps { 
-                script { 
-                    bat '''
-                    docker run --rm --network=host appium-epost-test bash -c "adb connect 192.168.1.17:5555 && adb devices && nohup appium --address 127.0.0.1:4723 > appium.log 2>&1 & sleep 20 && mvn test -Dtest=EPostTest"
-                    '''
-                }
-            } 
-        } 
+        stage('Run Tests') {
+    steps {
+        bat '''
+        docker run --rm ^
+        --add-host=host.docker.internal:host-gateway ^
+        your-image mvn clean test
+        '''
+    }
+} 
     }
 
     post { 
