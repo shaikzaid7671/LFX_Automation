@@ -1,0 +1,8 @@
+target/
+.git/
+.gitignore
+*.log
+reports/
+allure-results/
+allure-report/
+node_modules/
