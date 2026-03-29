@@ -1,17 +1,31 @@
 pipeline { 
-    agent any environment { DEVICE_IP = "192.168.1.17:5555" } 
-stages { stage('Build Docker Image') 
-        { steps { script { docker.build("appium-epost-test") // ✅ lowercase 
-                            } 
-                        } 
-                    } 
-            stage('Run Emergency Test in Container') 
-                { steps { 
-                    script { bat ''' docker run --rm --network=host appium-epost-test bash -c "adb connect 192.168.1.17:5555 && adb devices && appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 & sleep 20 && mvn test -Dtest=EPost" ''' }
-            } 
+    agent any environment { 
+            DEVICE_IP = "192.168.1.17:5555" } 
+    stages { 
+        stage('Build Docker Image') { 
+        steps { 
+            script { 
+            docker.build("appium-epost-test") // ✅ lowercase 
         } 
-    }
-post { always { echo "Publishing Test Results..." junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml' 
+    } 
+} 
+stage('Run Emergency Test in Container') { 
+        steps { 
+            script{ 
+            bat ''' 
+            docker run --rm --network=host appium-epost-test bash -c 
+            "adb connect 192.168.1.17:5555 && adb devices && appium --address 0.0.0.0 --port 4723 >
+            appium.log 2>&1 & sleep 20 && mvn test -Dtest=EPost"
+            ''' 
+            }
+        } 
+    } 
+}
+post { 
+    always { 
+            echo "Publishing Test Results..." 
+                junit allowEmptyResults: true, testResults: 
+                    '**/target/surefire-reports/*.xml' 
 } 
     } 
         }
