@@ -13,6 +13,11 @@ stage('Build Docker Image') {
         }
     }
 }
+stage('Build Docker Image') {
+    when {
+        expression { false }   // skip build
+    }
+}
 stage('Run Emergency Test in Container') {
     steps {
         script {
