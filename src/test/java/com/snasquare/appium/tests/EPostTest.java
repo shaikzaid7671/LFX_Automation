@@ -39,7 +39,7 @@ public class EPostTest {
 
          // ✅ FIXED (removed local variable)
         driver = new AndroidDriver(
-                new URL("http://host.docker.internal:4723/wd/hub");
+                new URL("http://host.docker.internal:4723/wd/hub"),
                 cap
         );
 
