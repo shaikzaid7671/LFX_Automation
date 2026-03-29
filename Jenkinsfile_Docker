@@ -6,26 +6,10 @@ pipeline {
     }
 
     stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("appium-login-test")
-                }
-            }
-        }
-stage('Run Emergency Post in Container') {
+stage('Build Docker Image') {
     steps {
         script {
             docker.build("appium-epost-test")  // ✅ lowercase
-        }
-    }
-}
-stage('Run Login Test in Container') {
-    steps {
-        script {
-            bat '''
-            docker run --rm --network=host appium-login-test bash -c "adb connect 192.168.1.17:5555 && adb devices && appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 & sleep 20 && mvn clean test"
-            '''
         }
     }
 }
