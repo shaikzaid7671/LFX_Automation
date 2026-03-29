@@ -38,9 +38,6 @@ stage('Run Emergency Test in Container') {
         always {
             echo "Publishing Test Results..."
             junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
-
-            echo "Cleaning Docker..."
-            bat 'docker system prune -a -f'
         }
     }
 }
