@@ -13,11 +13,6 @@ stage('Build Docker Image') {
         }
     }
 }
-stage('Build Docker Image') {
-    when {
-        expression { false }   // skip build
-    }
-}
 stage('Run Emergency Test in Container') {
     steps {
         script {
@@ -44,10 +39,11 @@ stage('Run Emergency Test in Container') {
             junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
         }
     }
-}
 post {
     always {
         echo "Cleaning Docker..."
         bat 'docker system prune -a -f'
+        }
     }
 }
+
