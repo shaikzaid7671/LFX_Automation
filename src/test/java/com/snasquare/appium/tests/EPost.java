@@ -21,19 +21,19 @@ public class EPost {
     @BeforeClass
     public void setUp() throws Exception {
 
-        DesiredCapabilities caps = new DesiredCapabilities();
+        DesiredCapabilities cap = new DesiredCapabilities();
 
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("deviceName", "Android Device");
-        caps.setCapability("udid", "192.168.1.17:5555");
-        caps.setCapability("automationName", "UiAutomator2");
+        cap.setCapability("platformName", "Android");
+        cap.setCapability("deviceName", "Android Device");
+        cap.setCapability("udid", "192.168.1.17:5555");
+        cap.setCapability("automationName", "UiAutomator2");
 
-        caps.setCapability("appPackage", "com.android.settings");
-        caps.setCapability("appActivity", ".Settings");
+        cap.setCapability("appPackage", "com.android.settings");
+        cap.setCapability("appActivity", ".Settings");
 
         AndroidDriver driver = new AndroidDriver(
                 new URL("http://127.0.0.1:4723"),
-                caps
+                cap
         );
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
