@@ -19,7 +19,7 @@ pipeline {
         bat '''
         docker run --rm ^
         --add-host=host.docker.internal:host-gateway ^
-        your-image mvn clean test
+        appium-epost-test mvn clean test
         '''
     }
 } 
