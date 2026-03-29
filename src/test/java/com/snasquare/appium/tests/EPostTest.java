@@ -16,7 +16,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-public class EPost {
+public class EPostTest {
 
     private AndroidDriver driver;
     private WebDriverWait wait;
