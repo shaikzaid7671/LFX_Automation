@@ -34,6 +34,9 @@ public class EPost {
         cap.setCapability("appPackage", "com.android.settings");
         cap.setCapability("appActivity", ".Settings");
 
+        cap.setCapability("noReset", true);
+        cap.setCapability("newCommandTimeout", 300);
+
         driver = new AndroidDriver(
                 new URL("http://127.0.0.1:4723"),
                 cap
