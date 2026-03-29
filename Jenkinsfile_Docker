@@ -18,21 +18,6 @@ stage('Run Emergency Test in Container') {
         script {
             bat '''
             docker run --rm --network=host appium-epost-test bash -c "
-            
-            echo '🔌 Connecting to device...'
-            adb kill-server
-            adb start-server
-
-            adb connect 192.168.1.17:5555
-
-            echo '📱 Checking devices...'
-            adb devices
-
-            echo '⏳ Waiting for device...'
-            sleep 10
-
-            adb devices | grep 'device' || exit 1
-
             echo '🚀 Starting Appium...'
             appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 &
 
@@ -53,5 +38,11 @@ stage('Run Emergency Test in Container') {
             echo "Publishing Test Results..."
             junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
         }
+    }
+}
+post {
+    always {
+        echo "Cleaning Docker..."
+        bat 'docker system prune -a -f'
     }
 }
