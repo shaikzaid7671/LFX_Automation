@@ -37,7 +37,7 @@ public class EPost {
         cap.setCapability("noReset", true);
         cap.setCapability("newCommandTimeout", 300);
 
-        new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), cap);
+        new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
