@@ -18,12 +18,35 @@ stage('Run Emergency Test in Container') {
         script {
             bat '''
             docker run --rm --network=host appium-epost-test bash -c "
-            echo '🚀 Starting Appium...'
+
+            echo ===== STARTING SETUP =====
+
+            adb kill-server
+            adb start-server
+
+            echo Connecting device...
+            adb connect 192.168.1.17:5555
+            adb devices
+
+            sleep 10
+
+            echo ===== STARTING APPIUM =====
             appium --address 0.0.0.0 --port 4723 > appium.log 2>&1 &
 
-            sleep 25
+            echo Waiting for Appium...
 
-            echo '🧪 Running tests...'
+            # 🔥 REAL WAIT (IMPORTANT)
+            for i in {1..30}
+            do
+              curl -s http://127.0.0.1:4723/wd/hub/status && break
+              echo Waiting... \$i
+              sleep 2
+            done
+
+            echo ===== APPIUM LOG =====
+            cat appium.log
+
+            echo ===== RUNNING TEST =====
             mvn clean test -Dtest=EPost
 
             "
