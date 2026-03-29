@@ -33,16 +33,14 @@ stage('Run Emergency Test in Container') {
 }
     }
 
+// ✅ SINGLE POST BLOCK
     post {
         always {
             echo "Publishing Test Results..."
             junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
-        }
-    }
-post {
-    always {
-        echo "Cleaning Docker..."
-        bat 'docker system prune -a -f'
+
+            echo "Cleaning Docker..."
+            bat 'docker system prune -a -f'
         }
     }
 }
