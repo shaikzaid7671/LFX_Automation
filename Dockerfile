@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    curl wget unzip git openjdk-17-jdk maven \
+    curl wget unzip git openjdk-17-jdk maven adb\
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js
