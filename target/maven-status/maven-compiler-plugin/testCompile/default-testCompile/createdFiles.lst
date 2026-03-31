@@ -1,0 +1,9 @@
+com\snasquare\appium\pages\LoginPage.class
+com\snasquare\appium\pages\EmergencyPostPage.class
+snasquare\appium\base\BaseTest.class
+com\snasquare\appium\managers\DriverManager.class
+com\snasquare\appium\tests\ExploreAppTest.class
+com\snasquare\appium\tests\LoginTest.class
+com\snasquare\appium\tests\EPostTest.class
+com\snasquare\appium\tests\LPost.class
+com\snasquare\appium\tests\FPost.class

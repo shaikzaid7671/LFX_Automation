@@ -1,0 +1,1 @@
+{"uuid":"1f3149ab-98c7-459c-9d99-86d50ce6fb09","name":"com.snasquare.appium.tests.EPostTest","children":["379c3816-05ff-4dbb-9def-6714d756ce8a"],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1774948409064,"stop":1774948417058}],"afters":[],"start":1774948409031,"stop":1774948490842}
