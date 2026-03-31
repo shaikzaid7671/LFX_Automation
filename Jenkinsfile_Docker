@@ -19,7 +19,7 @@ pipeline {
         bat '''
         docker run --rm ^
         --add-host=host.docker.internal:host-gateway ^
-        appium-epost-test 'mvn clean test -Dtest=LoginTest,EPostTest'
+        appium-epost-test "mvn -Dtest=LoginTest,EPostTest"
         '''
     }
 } 
