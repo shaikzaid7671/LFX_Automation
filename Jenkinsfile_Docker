@@ -23,5 +23,11 @@ pipeline {
         '''
     }
 } 
-    } 
+    }
+post { 
+        always { 
+            echo "Publishing Test Results..." 
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml' 
+        } 
+    }
 }
