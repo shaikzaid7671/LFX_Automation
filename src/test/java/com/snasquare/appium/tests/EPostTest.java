@@ -39,7 +39,7 @@ public class EPostTest {
 
          // ✅ FIXED (removed local variable)
         driver = new AndroidDriver(
-                new URL("http://127.0.0.1:4723"),
+                new URL("http://host.docker.internal:4723"),
                 cap
         );
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
