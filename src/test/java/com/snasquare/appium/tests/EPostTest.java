@@ -28,27 +28,25 @@ public class EPostTest {
 
         cap.setCapability("platformName", "Android");
         cap.setCapability("deviceName", "Android Device");
-        cap.setCapability("udid", "192.168.1.17:5555");
+        cap.setCapability("udid", "192.168.1.10:5555");
         cap.setCapability("automationName", "UiAutomator2");
 
-        cap.setCapability("appPackage", "com.android.settings");
-        cap.setCapability("appActivity", ".Settings");
+        cap.setCapability("appPackage", "com.lfx");
+        cap.setCapability("appActivity", "com.lfx.MainActivity");
 
         cap.setCapability("noReset", true);
         cap.setCapability("fullReset", false);
 
          // ✅ FIXED (removed local variable)
         driver = new AndroidDriver(
-                new URL("http://host.docker.internal:4723/wd/hub"),
+                new URL("http://127.0.0.1:4723"),
                 cap
         );
-
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
-
     @Test
-    public void automatedLoginTest() {
+    public void LoginTest() {
 
         /* ---------------- LOGIN ---------------- */
 
@@ -84,7 +82,7 @@ public class EPostTest {
 
             WebElement emergencyBtn = wait.until(
                     ExpectedConditions.elementToBeClickable(
-                            By.xpath("//android.widget.Button[@content-desc='POST EMERGENCY']")
+                            By.xpath("//android.widget.Button[@content-desc=\"POST EMERGENCY\"]")
                     )
             );
             emergencyBtn.click();
@@ -98,7 +96,7 @@ public class EPostTest {
 
                 WebElement allowLocation = wait.until(
                         ExpectedConditions.elementToBeClickable(
-                                By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+                                By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]")
                         )
                 );
 
@@ -119,7 +117,7 @@ public class EPostTest {
             // Click Upload Image button
             WebElement uploadBtn = wait.until(
                     ExpectedConditions.elementToBeClickable(
-                            By.xpath("//android.view.ViewGroup[@content-desc='󰻜']")
+                            By.xpath("//android.view.ViewGroup[@content-desc=\"\uDB83\uDEDC\"]")
                     )
             );
             uploadBtn.click();
@@ -135,7 +133,7 @@ public class EPostTest {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             WebElement firstImage = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("(//android.widget.ImageView)[2]")
+                    By.xpath("//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[5]/android.view.View[2]/android.view.View[2]/android.view.View")
             ));
 
             firstImage.click();
@@ -144,7 +142,7 @@ public class EPostTest {
             // Click ADD / DONE button
             WebElement addButton = wait.until(
                     ExpectedConditions.elementToBeClickable(
-                            By.xpath("//android.widget.Button[contains(@text,'Add') or contains(@text,'Done')]")
+                            By.xpath("//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[6]/android.view.View[3]/android.widget.Button")
                     )
             );
             addButton.click();
@@ -155,7 +153,7 @@ public class EPostTest {
 
             WebElement desc = wait.until(
                     ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("(//android.widget.EditText)[1]")
+                            By.xpath("//android.widget.EditText[@resource-id=\"text-input-outlined\" and @text=\"Describe the details\"]")
                     )
             );
 
@@ -166,7 +164,7 @@ public class EPostTest {
 
             WebElement informed = wait.until(
                     ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("(//android.widget.EditText)[2]")
+                            By.xpath("//android.widget.EditText[@resource-id=\"text-input-outlined\" and @text=\"Police station or hospital informed to\"]")
                     )
             );
 
@@ -214,7 +212,7 @@ public class EPostTest {
             /* -------- SELECT CASUALTY OPTION -------- */
 
             WebElement casualtyOption = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//android.widget.TextView[contains(@text,'Casualty')]")
+                    By.xpath("//android.view.ViewGroup[@content-desc=\"\uDB80\uDC2F, Casualty / Injured Person\"]")
             ));
 
             casualtyOption.click();
