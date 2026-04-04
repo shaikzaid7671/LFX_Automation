@@ -38,7 +38,14 @@ pipeline {
      post {
         always {
             // Publishes the TestNG report
-            testNG reportFilenamePattern: '**/testng-results.xml'
+            publishHTML([
+            reportDir: 'target/surefire-reports',
+            reportFiles: 'surefire-report.html',
+            reportName: 'TestNG Report',
+            keepAll: true,
+            alwaysLinkToLastBuild: true,
+            allowMissing: true
+            ])
         }
     }
 }
