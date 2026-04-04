@@ -14,16 +14,19 @@ pipeline {
             } 
         } 
 
-        stage('Run Tests') {
+stage('Run Tests') {
     steps {
         bat '''
         docker run --rm ^
+        -v %WORKSPACE%:/app ^
+        -w /app ^
         --add-host=host.docker.internal:host-gateway ^
         appium-epost-test bash -c "mvn clean test surefire-report:report"
         '''
+        }
     }
 } 
-    }
+    
 post {
     always {
         publishHTML([
