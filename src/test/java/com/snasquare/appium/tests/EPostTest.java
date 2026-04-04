@@ -92,23 +92,23 @@ public class EPostTest {
 
             // Handle Location Permission
 
-            try {
+            //try {
 
-                WebElement allowLocation = wait.until(
-                        ExpectedConditions.elementToBeClickable(
-                                By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]")
-                        )
-                );
+                //WebElement allowLocation = wait.until(
+                        //ExpectedConditions.elementToBeClickable(
+                                //By.xpath("//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_allow_foreground_only_button\"]")
+                        //)
+                //);
 
-                allowLocation.click();
+                //allowLocation.click();
 
-                System.out.println("✅ Location permission granted (While using the app)");
+                //System.out.println("✅ Location permission granted (While using the app)");
 
-            } catch (Exception e) {
+            //} catch (Exception e) {
 
-                System.out.println("⚠️ Permission popup not displayed");
+                //System.out.println("⚠️ Permission popup not displayed");
 
-            }
+            //}
 
             /* ---------------- UPLOAD IMAGE ---------------- */
 
