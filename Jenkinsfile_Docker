@@ -39,7 +39,6 @@ pipeline {
         always {
             // Publishes the TestNG report
             testNG reportFilenamePattern: '**/testng-results.xml'
-            }
         }
     }
 }
