@@ -17,10 +17,10 @@ pipeline {
 stage('Run Tests') {
     steps {
         bat '''
-        docker run --name test-container ^
+        docker run --rm --name test-container ^
           --add-host=host.docker.internal:host-gateway ^
           appium-epost-test ^
-          bash -c "mvn clean test surefire-report:report"
+          bash -c "mvn clean test -Dtest=EPostTest surefire-report:report"
         '''
         }
     }
