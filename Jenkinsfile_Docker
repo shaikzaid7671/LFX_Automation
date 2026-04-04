@@ -35,17 +35,11 @@ pipeline {
         }
     }
 
-    post {
+     post {
         always {
-            // ✅ Publish correct HTML report
-            publishHTML([
-                reportDir: 'target/site',
-                reportFiles: 'surefire-report.html',
-                reportName: 'TestNG Report',
-                keepAll: true,
-                alwaysLinkToLastBuild: true,
-                allowMissing: true
-            ])
+            // Publishes the TestNG report
+            testNG reportFilenamePattern: '**/testng-results.xml'
+            }
         }
     }
 }
