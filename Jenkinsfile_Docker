@@ -2,39 +2,49 @@ pipeline {
     agent any 
 
     environment { 
-        DEVICE_IP = "192.168.1.17:5555" 
+        DEVICE_IP = "192.168.1.10:5555" 
     } 
 
     stages { 
+
         stage('Build Docker Image') { 
             steps { 
                 script { 
-                    docker.build("appium-epost-test") // ✅ lowercase 
+                    docker.build("appium-epost-test")
                 } 
             } 
         } 
 
-stage('Run Tests') {
-    steps {
-        bat '''
-        docker run --rm --name test-container ^
-          --add-host=host.docker.internal:host-gateway ^
-          appium-epost-test ^
-          bash -c "mvn clean test -Dtest=EPostTest surefire-report:report"
-        '''
+        stage('Run Tests') {
+            steps {
+
+                // ✅ Remove old container if exists
+                bat 'docker rm -f test-container || exit 0'
+
+                // ✅ Run tests (ONLY EPostTest)
+                bat '''
+                docker run --name test-container ^
+                  --add-host=host.docker.internal:host-gateway ^
+                  appium-epost-test ^
+                  bash -c "mvn clean test -Dtest=EPostTest surefire-report:report"
+                '''
+
+                // ✅ Copy reports from container to Jenkins workspace
+                bat 'docker cp test-container:/app/target target'
+            }
         }
     }
-} 
-    
-post {
-    always {
-        publishHTML([
-            reportDir: 'target/surefire-reports',
-            reportFiles: 'index.html',
-            reportName: 'TestNG Surefire Report',
-            keepAll: true,
-            allowMissing: false,
-            alwaysLinkToLastBuild: true
+
+    post {
+        always {
+            // ✅ Publish correct HTML report
+            publishHTML([
+                reportDir: 'target/site',
+                reportFiles: 'surefire-report.html',
+                reportName: 'TestNG Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: true
             ])
         }
     }
