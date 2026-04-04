@@ -17,14 +17,17 @@ pipeline {
 stage('Run Tests') {
     steps {
         bat '''
-        docker run --rm ^
-        -v %WORKSPACE%:/app ^
-        -w /app ^
+        docker run --name test-container ^
         --add-host=host.docker.internal:host-gateway ^
         appium-epost-test bash -c "mvn test surefire-report:report"
         '''
-        }
+        
+        bat '''
+        docker cp test-container:/app/target/surefire-reports %WORKSPACE%/target/
+        docker rm test-container
+        '''
     }
+}
 } 
     
 post {
