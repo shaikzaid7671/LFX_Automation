@@ -21,7 +21,7 @@ stage('Run Tests') {
         -v %WORKSPACE%:/app ^
         -w /app ^
         --add-host=host.docker.internal:host-gateway ^
-        appium-epost-test bash -c "mvn clean test surefire-report:report"
+        appium-epost-test bash -c "mvn test surefire-report:report"
         '''
         }
     }
