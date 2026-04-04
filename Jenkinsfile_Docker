@@ -41,7 +41,7 @@ pipeline {
             publishHTML([
             reportDir: 'target/surefire-reports',
             reportFiles: 'surefire-report.html',
-            reportName: 'TestNG Report',
+            reportName: 'TestNG Results',
             keepAll: true,
             alwaysLinkToLastBuild: true,
             allowMissing: true
