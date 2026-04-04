@@ -24,10 +24,16 @@ pipeline {
     }
 } 
     }
-post { 
-        always { 
-            echo "Publishing Test Results..." 
-            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml' 
-        } 
+post {
+    always {
+        publishHTML([
+            reportDir: 'target/surefire-reports',
+            reportFiles: 'index.html',
+            reportName: 'TestNG Surefire Report',
+            keepAll: true,
+            allowMissing: false,
+            alwaysLinkToLastBuild: true
+            ])
+        }
     }
 }
