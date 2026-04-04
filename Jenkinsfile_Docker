@@ -39,7 +39,7 @@ pipeline {
         always {
             // Publishes the TestNG report
             publishHTML([
-            reportDir: 'target/surefire-reports',
+            reportDir: 'target/site',
             reportFiles: 'surefire-report.html',
             reportName: 'TestNG Reports',
             keepAll: true,
