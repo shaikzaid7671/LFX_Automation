@@ -43,8 +43,6 @@ pipeline {
             reportFiles: 'surefire-report.html',
             reportName: 'TestNG Reports',
             keepAll: true,
-            alwaysLinkToLastBuild: true,
-            allowMissing: true
             ])
         }
     }
