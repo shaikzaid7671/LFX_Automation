@@ -26,7 +26,7 @@ pipeline {
                 docker run --name test-container ^
                   --add-host=host.docker.internal:host-gateway ^
                   appium-epost-test ^
-                  bash -c "mvn clean test -Dtest=EPostTest site"
+                  bash -c "mvn -Dtest=EPostTest test"
                 '''
 
                 // ✅ Copy reports from container to Jenkins workspace
