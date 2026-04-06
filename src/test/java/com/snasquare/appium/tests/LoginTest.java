@@ -31,23 +31,22 @@ public class LoginTest {
         cap.setCapability("udid", "192.168.1.10:5555");
         cap.setCapability("automationName", "UiAutomator2");
 
-        cap.setCapability("appPackage", "com.android.settings");
-        cap.setCapability("appActivity", ".Settings");
+        cap.setCapability("appPackage", "com.lfx");
+        cap.setCapability("appActivity", "com.lfx.MainActivity");
 
         cap.setCapability("noReset", true);
         cap.setCapability("fullReset", false);
 
-        // ✅ FIXED (removed local variable)
+         // ✅ FIXED (removed local variable)
         driver = new AndroidDriver(
-                new URL("http://127.0.0.1:4723"),
+                new URL("http://host.docker.internal:4723"),
                 cap
         );
-
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     @Test
-    public void LoginTest() {
+    public void automatedLoginTest() {
 
         // Click Login button
         WebElement loginButton = wait.until(
