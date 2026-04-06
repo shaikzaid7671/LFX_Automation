@@ -37,8 +37,16 @@ pipeline {
 
      post {
     always {
-        // This pattern is often correct, but double-check the path in your workspace
-        testNG reportFilenamePattern: 'target/site/surefire-report.html'
+        sh 'mvn surefire-report:report-only'
+        
+        publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'target/site/',
+            reportFiles: 'surefire-report.html',
+            reportName: 'TestReport'
+            ]
         }
     }
 }
