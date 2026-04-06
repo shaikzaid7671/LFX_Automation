@@ -36,14 +36,9 @@ pipeline {
     }
 
      post {
-        always {
-            // Publishes the TestNG report
-            publishHTML([
-            reportDir: 'target/site',
-            reportFiles: 'surefire-report.html',
-            reportName: 'TestNG Reports',
-            keepAll: true,
-            ])
+    always {
+        // This pattern is often correct, but double-check the path in your workspace
+        testNG reportFilenamePattern: '**/surefire-report.html'
         }
     }
 }
