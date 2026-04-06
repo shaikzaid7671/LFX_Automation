@@ -38,7 +38,7 @@ pipeline {
      post {
     always {
         // This pattern is often correct, but double-check the path in your workspace
-        testNG reportFilenamePattern: '**/surefire-report.html'
+        testNG reportFilenamePattern: 'target/site/surefire-report.html'
         }
     }
 }
