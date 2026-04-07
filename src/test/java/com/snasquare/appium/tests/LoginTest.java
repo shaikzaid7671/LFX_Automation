@@ -32,7 +32,7 @@ public class LoginTest {
         cap.setCapability("automationName", "UiAutomator2");
 
         cap.setCapability("appPackage", "com.lfx");
-        cap.setCapability("appActivity", "com.lfx.MainActivity");
+        cap.setCapability("appActivity", ".MainActivity");
 
         cap.setCapability("noReset", true);
         cap.setCapability("fullReset", false);
