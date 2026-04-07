@@ -34,7 +34,7 @@ public class LoginTest {
         cap.setCapability("appPackage", "com.lfx");
         cap.setCapability("appActivity", ".MainActivity");
 
-        cap.setCapability("noReset", true);
+        cap.setCapability("noReset", false);
         cap.setCapability("fullReset", false);
 
          // ✅ FIXED (removed local variable)
